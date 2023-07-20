@@ -1,0 +1,236 @@
+@import-normalize;
+@import 'params/theme_colors';
+@import 'params/breakpoints';
+body,#root{
+  // min-width: 100vw;
+  // min-height: 100vh;
+}
+body>* {
+  padding:0px;
+  margin:0px; 
+  font-family: sans-serif;
+} 
+button{
+  border: none;
+}
+html {
+  scroll-behavior: smooth;
+}
+.action-button{
+  @include theme('background-color',$color1);
+  @include theme('color',$text1);
+  padding: 3px 15px;
+  border-radius: 50px; 
+}
+.minor-button{
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid;
+  @include theme('background-color',$text3);
+  @include theme('border-color',$color1);
+  @include theme('color',$color1);
+} 
+.navbar{
+  padding:0;
+  // @include theme('background-color', $background3);
+  background-color: #252525ec;
+  backdrop-filter: blur(2px);
+  .container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .logo{
+      *{
+        @include theme('fill',$text1);
+      }
+      transition: ease-in-out 1s;
+      &:hover,&:focus{
+        transition: ease-in-out 1s;
+        g>#l-arrow{
+          animation: bounce-left 1s;
+          animation-iteration-count: infinite;
+          @keyframes bounce-left {
+            0% {transform:translate(0)}
+            50% {transform:translate(-5px)}
+            100% {transform:translate(0)}
+          }
+        }
+        g>#r-arrow{
+          animation: bounce-right 1s;
+          animation-iteration-count: infinite;
+          @keyframes bounce-right {
+            0% {transform:translate(0)}
+            50% {transform:translate(5px)}
+            100% {transform:translate(0)}
+          }
+        }
+      }
+    }
+    .navbar-toggler.collapsed,.navbar-toggler{
+      .navbar-toggler-icon{
+        background-image: none;
+        transition: ease-in-out .5s;
+        background-image: url("../media/images/Plus.svg");
+        color:white;
+        &:hover,&:focus{
+          transition: ease-in-out .5s;
+          background-image: url("../media/images/Plus green.svg");
+        }
+      }
+      border:none;
+      &:hover,&:focus{
+        border:none;
+        box-shadow: none;
+      }
+    }
+    .navbar-toggler{
+      transition: ease-in-out .5s;
+      .navbar-toggler-icon{
+        transition: ease-in-out .5s;
+        background-image: url("../media/images/Minus.svg");
+        color:white;
+        &:hover,&:focus{
+          transition: ease-in-out .5s;
+          background-image: url("../media/images/Minus green.svg");
+        }
+      }
+      border:none;
+      &:hover,&:focus{
+        border:none;
+        box-shadow: none;
+      }
+    }
+    #responsive-navbar-nav.collapse.show{
+      .navbar-nav>a{
+        margin:1rem;
+      }
+    }
+    #responsive-navbar-nav.show{
+      .navbar-nav{
+        a{
+          margin: auto;
+        }
+      }
+      button{
+        width: stretch;
+      }
+    }
+    #responsive-navbar-nav{
+      list-style-type: none;
+      flex-grow: initial;
+      justify-content: space-between;
+      .navbar-nav{
+        list-style-type: none;
+        justify-content: space-between;
+        .selected,.active{
+          @include theme('color', $text2);
+        }
+        a{
+          @include theme('color', $text1);
+          margin:auto;
+          margin:0 1rem;
+          text-align: center;
+          text-decoration: none;
+          .nav-link{
+            text-decoration: none;
+            color:inherit;
+          }
+        }
+        &::after{
+          margin:0 1rem;
+          content: "";
+          border-width: 1px;
+          border-style: solid;
+          @include theme('border-color',$text1)
+        }
+      }
+    }
+    button.action-button{
+      margin: 1rem;
+      width: stretch;
+    }
+  }
+}
+.loading{
+  // position:relative;
+  // height:max-content;
+  .wrapper{
+    display: grid;
+    place-items: center;
+    width: stretch;
+    height: stretch;
+    svg{
+      // display: inline-block;
+      margin:auto;
+      width: inherit;
+      height: inherit;
+      max-width: 50px;
+      max-height: 50px;
+      animation: circle 4s infinite;
+      @keyframes circle {
+        0%{ transform: rotate(0deg);}
+        5%{ transform: rotate(0deg);}
+        20%{ transform: rotate(90deg);}
+        //25
+        30%{ transform: rotate(90deg);}
+        45%{ transform: rotate(180deg);}
+        //50
+        55%{ transform: rotate(180deg);}
+        70%{ transform: rotate(270deg);}
+        //75
+        80%{ transform: rotate(270deg);}
+        95%{ transform: rotate(360deg);}
+        100%{ transform: rotate(360deg);}
+      }
+      #favicon>g>#arrows{
+        #l-out{
+          animation: swipeLO 1s 1s infinite;
+          @keyframes swipeLO {
+            0% {transform: translate(-23px);}
+            100% {transform: translate(0);}
+          }
+        }
+        #l-arrow{
+          animation: swipeLA 1s 1s infinite;
+          @keyframes swipeLA {
+            0% {transform: translate(0);}
+            100% {transform: translate(23px);}
+          }
+        }
+        #r-out{
+          animation: swipeRO 1s 1s infinite;
+          @keyframes swipeRO {
+            0% {transform: translate(23px);}
+            100% {transform: translate(0);}
+          }
+        }
+        #r-arrow{
+          animation: swipeRA 1s 1s infinite;
+          @keyframes swipeRA {
+            0% {transform: translate(0);}
+            100% {transform: translate(-23px);}
+          }
+        }
+      }
+    }
+  }
+}
+.hero{
+  position: relative;
+  width: stretch;
+  overflow: hidden;
+  height: 500px;
+  .foreground{
+    display: grid;
+    place-items: center;
+    position: absolute;
+    width: stretch;
+    height: stretch;
+    inset: 0;
+  }
+
+}
+.hero.home{
+  @include theme('color',$text1);
+  @include theme('background-color',$color1);
+}

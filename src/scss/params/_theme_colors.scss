@@ -1,0 +1,62 @@
+// colors of website. from 
+// https://www.fabrizioduroni.it/2020/05/20/dark-mode-css-sass-scss/
+
+// Usage:
+// @include theme('property', $color from this doc);
+
+$dark-theme:  "dark-theme";
+$light-theme: "light-theme";
+
+$color1:       "color1";
+$color2:       "color2";
+$color3:       "color3";
+$text1:        "text1";
+$text2:        "text2";
+$text3:        "text3";
+$background1:  "background1";
+$background2:  "background2";
+$background3:  "background3";
+$background4:  "background4";
+
+$themes:( 
+  $light-theme:(
+    $color1:       #10A2AE,
+    $color2:       #f5b320,
+    $color3:       hsl(341, 90%, 41%),
+    $text1:        #ffffff,
+    $text2:        #12cad9,
+    $text3:        #252525,
+    $background1:  #10A2AE,
+    $background2:  #FFFFFF,
+    $background3:  #252525,
+    $background4:  #1B6369,
+  ),
+  $dark-theme:( //modify this bc we have darkmode lel
+    $color1:       #10A2AE,
+    $color2:       #f5b320,
+    $color3:       #c50a45,
+    $text1:        #ffffff,
+    $text2:        #12cad9,
+    $text3:        #252525,
+    $background1:  #10A2AE,
+    $background2:  #FFFFFF,
+    $background4:  #1B6369,
+  )
+);
+
+@mixin themeProperty($theme, $property, $color, $additionalPropertiesPositionIsFront, $additionalProperties) {
+  @if $additionalPropertiesPositionIsFront {
+    #{$property}: unquote($additionalProperties + ' ' + map-get($theme, $color));
+  } @else {
+    #{$property}: unquote(map-get($theme, $color) + ' ' + $additionalProperties);
+  }
+}
+
+@mixin theme($property, $color, $additionalPropertiesPositionIsFront: false, $additionalProperties: '') {
+  $light: map-get($themes, $light-theme);
+  $dark: map-get($themes, $dark-theme);
+  @include themeProperty($light, $property, $color, $additionalPropertiesPositionIsFront, $additionalProperties);
+  @media (prefers-color-scheme: dark) {
+    @include themeProperty($dark, $property, $color, $additionalPropertiesPositionIsFront, $additionalProperties);
+  }
+}
