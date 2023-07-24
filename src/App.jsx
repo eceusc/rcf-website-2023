@@ -33,7 +33,6 @@ function App() {
           "/#about":"About",
           "/#faq":"FAQ",
           "/#companies":"Companies",
-          "/projects":"Projects"
       }}
       />
       <Suspense fallback={<Loading></Loading>}>
